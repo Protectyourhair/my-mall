@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item">
-    <img :src="goodsitem.show.img" :key="showImage"/>
+    <img :src="goodsitem.show.img" :key="showImage" @load="imageLoad"/>
     <div class="goods-info">
       <p>{{goodsitem.title}}</p>
       <span class="price">{{goodsitem.price}}</span>
@@ -11,13 +11,21 @@
 
 <script>
 export default {
-  name: "GoodListItem",
+  name: "GoodsListItem",
   props: {
     goodsitem: {
       type: Object,
       default() {
         return {}
       }
+    }
+  },
+  methods: {
+    imageLoad(){
+      //console.log(this.imageLoad);
+      //总事件，将事件传递给betterscroll组件
+      this.$bus.$emit('itemImageLoad')
+
     }
   },
   computed: {

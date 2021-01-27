@@ -1,16 +1,16 @@
 <template>
   <div class="goods">
-    <good-list-item v-for="(item, index) in goods" :goodsitem="item" :key="index"/>
+    <goods-list-item v-for="(item, index) in goods" :goodsitem="item" :key="index"/>
   </div>
 </template>
 
 <script>
-import GoodListItem from '@/components/content/goods/GoodListItem';
+import GoodsListItem from '@/components/content/goods/GoodsListItem';
 
 export default {
-  name: "GoodList",
+  name: "GoodsList",
   components: {
-    GoodListItem
+    GoodsListItem
   },
   props: {
     goods: {
