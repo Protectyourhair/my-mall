@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-item">
+  <div class="goods-item" @click="itemClick">
     <img :src="goodsitem.show.img" :key="showImage" @load="imageLoad"/>
     <div class="goods-info">
       <p>{{goodsitem.title}}</p>
@@ -25,7 +25,10 @@ export default {
       //console.log(this.imageLoad);
       //总事件，将事件传递给betterscroll组件
       this.$bus.$emit('itemImageLoad')
-
+    },
+    itemClick(){
+      //console.log('详情页');
+      this.$router.push('/detail/' + this.goodsitem.iid)
     }
   },
   computed: {

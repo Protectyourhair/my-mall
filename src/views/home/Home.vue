@@ -2,9 +2,9 @@
   <div id="home" class="wrapper">
     <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
     <tab-control :titles="['流行', '新款', '精选']"
-                 @tabClick="tabClick"
+                 @tabclick="tabClick"
                  ref="tabControl1"
-                 class="tab-control" v-show="isTabFixed"/>
+                 class="tab-control1" v-show="isTabFixed"/>
     <scroll class="content"
             ref="scroll"
             :probe-type="3"
@@ -36,6 +36,7 @@ import BackTop from 'components/content/backTop/BackTop'
 
 import { getHomeMultidata, getHomeGoods } from "network/home"
 import {debounce} from "common/utils";
+
 
 export default {
   name: "Home",
@@ -71,10 +72,12 @@ export default {
     }
   },
   destroyed() {
-    console.log('home destroyed');
+    //console.log('home destroyed');
   },
+  //保持活跃，当用户离开home界面时，将所在位置进行保存，
   activated() {
-    this.$refs.scroll.scrollTo(0, this.saveY, 0)
+    this.$refs.scroll.scrollTo(0, this.saveY,0)
+    //解决自动滚动的bug
     this.$refs.scroll.refresh()
   },
   deactivated() {
@@ -105,16 +108,7 @@ export default {
     /**
      * 事件监听相关的方法
      */
-    /*防抖函数
-    debounce(func, delay) {
-      let timer = null
-      return function(...args) {
-        if(timer) clearTimeout(timer)
-        timer = setTimeout(() => {
-          func.apply(this, args)
-        },delay)
-      }
-    },*/
+
     tabClick(index) {
       switch (index) {
         case 0:
@@ -127,6 +121,7 @@ export default {
           this.currentType = 'sell'
           break
       }
+      //让两个tabctrol进行同步
       this.$refs.tabControl1.currentIndex = index;
       this.$refs.tabControl2.currentIndex = index;
     },
@@ -198,7 +193,7 @@ export default {
     right: 0;
   }
 
-  .tab-control {
+  .tab-control1 {
     position: relative;
     z-index: 9;
   }

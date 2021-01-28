@@ -32,6 +32,7 @@
     },
     methods: {
       imageLoad() {
+        //轮播图只加载一次就将事件发射出去
         if (!this.isLoad) {
           this.$emit('swiperImageLoad')
           this.isLoad = true
