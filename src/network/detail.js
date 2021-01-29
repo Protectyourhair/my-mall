@@ -8,6 +8,13 @@ export function getDetail(iid) {
     }
   });
 }
+export function getRecommend() {
+  return request({
+    url:'/recommend'
+  })
+
+}
+
 //将几组数据封装成一个对象，方便使用
 //商品详情数据
 export class Goods {

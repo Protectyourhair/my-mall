@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item" @click="itemClick">
-    <img :src="goodsitem.show.img" :key="showImage" @load="imageLoad"/>
+    <img :src="showImage" :key="showImage" @load="imageLoad"/>
     <div class="goods-info">
       <p>{{goodsitem.title}}</p>
       <span class="price">{{goodsitem.price}}</span>
@@ -20,22 +20,38 @@ export default {
       }
     }
   },
+  computed: {
+    showImage() {
+      return this.goodsitem.image || this.goodsitem.show.img
+    }
+  },
   methods: {
     imageLoad(){
       //console.log(this.imageLoad);
       //总事件，将事件传递给betterscroll组件
-      this.$bus.$emit('itemImageLoad')
+      //this.$bus.$emit('itemImageLoad')
+      if (this.$route.path === '/home') {
+        this.$bus.$emit('itemImageLoad');
+      } else if (this.$route.path === '/detail') {
+        this.$bus.$emit('detailItemImgLoad');
+      }
     },
+
     itemClick(){
       //console.log('详情页');
-      this.$router.push('/detail/' + this.goodsitem.iid)
+      this.$router.push({
+        path: '/detail',
+        query: {
+          iid : this.goodsitem.iid
+        }
+      })
     }
   },
   computed: {
     showImage() {
       return this.goodsitem.image || this.goodsitem.show.img;
     }
-  },
+  }
 }
 </script>
 

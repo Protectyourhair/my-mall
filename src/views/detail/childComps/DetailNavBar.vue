@@ -24,13 +24,14 @@ export default {
   },
   data(){
     return {
-      title: ['商品', '参数', '评论', '推荐'],
+      title: ['商品', '评论', '参数', '推荐'],
       currentIndex: 0
     }
   },
   methods: {
     titleClick(index) {
       this.currentIndex = index
+      this.$emit('titleClick', index)
     },
     backClick(){
       //返回上一页，this.$router.go(-1)
