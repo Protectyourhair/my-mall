@@ -24,7 +24,13 @@
 
 <script>
 export default {
-name: "DetailBottomBar"
+  name: "DetailBottomBar",
+  methods: {
+    addToCart() {
+      //因为在数据在父组件中，所以需要发出事件
+      this.$emit('addCart')
+    }
+  }
 }
 </script>
 

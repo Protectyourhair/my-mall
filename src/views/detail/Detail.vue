@@ -1,6 +1,7 @@
 <template>
   <div id="detail">
     <detail-nav-bar class="detail-nav" @titleClick="titleClick" ref="detailNav"/>
+
     <scroll class="detail-content"
             ref="scroll" @scroll="contentScroll"
             :probeType="3"
@@ -13,7 +14,7 @@
       <detail-params-info :itemParams="itemParams" ref="params"/>
       <goods-list ref="recommend" :goods="recommend"/>
     </scroll>
-    <detail-bottom-bar />
+    <detail-bottom-bar @addCart="addToCart"/>
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
 
   </div>
@@ -154,6 +155,18 @@ export default {
     backClick() {
       this.$refs.scroll.scrollTo(0, 0)
     },
+    addToCart() {
+      //显示购物车需要展示的数据
+      const product = {}
+      product.image = this.topImages[0];
+      product.title = this.goods.title;
+      product.desc = this.goods.desc;
+      product.price = this.goods.realPrice;
+      product.iid = this.iid;
+      //将商品添加到购物车
+      //因为存在判断条件，所以放在actions里，用dispatch调用
+      this.$store.dispatch('addCart', product)
+    }
   }
 }
 </script>
